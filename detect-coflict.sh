@@ -1,17 +1,17 @@
 #!/bin/bash
 
 # マージを試みる
-git merge bbb
+git merge pull
 
-# マージの結果を確認
+# pull コマンドの結果を確認
 if [ $? -ne 0 ]; then
-    echo "コンフリクトが発生しました！"
+    echo "PULL中にエラーが発生しました（コンフリクトの可能性あり）!"
     
     # コンフリクト状態のファイルをリストアップ
     conflicted_files=$(git diff --name-only --diff-filter=U)
     
     if [ -z "$conflicted_files" ]; then
-        echo "コンフリクトが検出されませんでした。"
+        echo "コンフリクトファイルが検出されませんでした。"
     else
         echo "以下のファイルでコンフリクトが発生しました:"
         echo "$conflicted_files"
@@ -24,5 +24,5 @@ if [ $? -ne 0 ]; then
         done
     fi
 else
-    echo "マージが成功しました！"
+    echo "PULLとマージが成功しました!"
 fi
